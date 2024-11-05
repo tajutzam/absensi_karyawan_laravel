@@ -50,6 +50,7 @@ class DashboardController extends Controller
     }
 
     public function setting(){
+
         return view("dashboard.settings.index");
     }
 
