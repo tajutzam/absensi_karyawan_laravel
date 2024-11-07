@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.tailwindcss.css">
+
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
 
     <style>
@@ -89,22 +89,66 @@
 
 
     <nav
-        class="h-[150px] bg-[#86DED7] rounded-bl-[50px] rounded-br-[50px] flex flex-row  justify-between px-10 items-center">
-        <div>
-            @yield('navmenu')
+        class="h-[150px] bg-[#86DED7] rounded-bl-[50px] rounded-br-[50px] flex flex-row justify-between px-10 items-center relative">
+        <!-- Brand or Logo (optional) -->
+        <div class="flex justify-between w-full lg:w-auto items-center">
+            <!-- Hamburger Icon (Visible on mobile only) -->
+            <button id="menu-toggle" class="lg:hidden text-4xl text-white focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
         </div>
-        <a href="/dashboard/setting" class="">
+
+        <!-- Navigation Links -->
+        <div id="menu"
+            class="hidden lg:flex flex-col lg:flex-row lg:space-x-4 lg:justify-center items-center lg:items-center w-full lg:w-auto">
+            <ol class="flex flex-col lg:flex-row lg:space-x-4 items-center lg:justify-center">
+                <li>
+                    <a href="{{ route('admin.dashboard') }}"
+                        class="text-lg lg:text-2xl font-bold {{ request()->routeIs('admin.dashboard') ? 'text-black' : 'text-gray-500' }} hover:text-black">
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('karyawan.index') }}"
+                        class="text-2xltext-lg lg:text-2xl font-bold {{ request()->routeIs('karyawan.index') ? 'text-black' : 'text-gray-500' }} hover:text-black">
+                        Data Karyawan
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('golongan.index') }}"
+                        class="text-2xltext-lg lg:text-2xl font-bold {{ request()->routeIs('golongan.index') ? 'text-black' : 'text-gray-500' }} hover:text-black">
+                        Data Golongan
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('laporan-kehadiran.index') }}"
+                        class="text-2xltext-lg lg:text-2xl font-bold {{ request()->routeIs('laporan-kehadiran.index') ? 'text-black' : 'text-gray-500' }} hover:text-black">
+                        Data Laporan Kehadiran
+                    </a>
+                </li>
+            </ol>
+        </div>
+
+        <!-- Notification Icon -->
+        <a href="/admin/setting" class="hidden lg:block">
             <i class="fa-regular fa-bell text-white text-4xl"></i>
         </a>
     </nav>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+
     <!-- Map and History Section -->
     @yield('content')
+
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            var menu = document.getElementById('menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
 
 </body>
 
